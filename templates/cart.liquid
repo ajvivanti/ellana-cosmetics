@@ -1,0 +1,525 @@
+{% comment %}
+  The contents of the cart.liquid template can be found in /sections/cart-template.liquid
+{% endcomment %}
+
+{% for product in collections.free-gift.products %}
+	{% assign gwp_title = product.title %}
+	{% assign product_id = product.id %}
+{% endfor %}
+
+{% for product in collections.free-gift-second.products %}
+	{% assign gwp_title_second = product.title %}
+	{% assign product_id = product.id %}
+{% endfor %}
+
+{% for product in collections.free-gift-third.products %}
+	{% assign gwp_title_third = product.title %}
+	{% assign product_id = product.id %}
+{% endfor %}
+
+{% for product in collections.free-gift-fourth.products %}
+	{% assign gwp_title_fourth = product.title %}
+	{% assign product_id = product.id %}
+{% endfor %}
+
+{% for product in collections.free-gift.products %}
+	{% assign gwp_price =  product.price %}
+{% endfor %}
+
+
+{% assign gwp_true = false %}
+{% assign gwp_one = 0 %}
+{% for item in cart.items %}
+	{% if item.product.title contains gwp_title %}
+		{% assign gwp_true = true %}
+		{% for product in collections.free-gift.products %}
+			{% assign gwp_one =  product.price %}
+		{% endfor %}
+	{% endif %}
+    {% assign reco_root = item.product.id %}
+{% endfor %}
+
+{% assign gwp_true_second = false %}
+{% assign gwp_two = 0 %}
+{% for item in cart.items %}
+	{% if item.product.title contains gwp_title_second %}
+		{% assign gwp_true_second = true %}
+		{% for product in collections.free-gift-second.products %}
+			{% assign gwp_two =  product.price %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+
+
+
+{% assign total_cart_less_gwp = cart.total_price %}
+{% for item in cart.items %}
+    {% if item.product.title == gwp_title or item.product.title == gwp_title_second or item.product.title == gwp_title_third or item.product.title == gwp_title_fourth %}
+      {% assign total_cart_less_gwp = total_cart_less_gwp | minus: item.line_price %}
+    {% endif %}
+{% endfor %}
+
+
+
+{% assign newTotal = cart.total_price %}
+{% for item in cart.items %}
+  {% unless item.variant.compare_at_price == 0  %}
+	{% assign newTotal = newTotal | minus: item.line_price %}
+  {% endunless %}
+{% endfor %}
+
+{% assign cart_total_regular = cart.total_price %}
+{% for item in cart.items %}
+    {% if item.variant.compare_at_price > item.price and item.product.tags contains 'makeup' %}
+      {% assign cart_total_regular = cart_total_regular | minus: item.line_price %}
+    {% endif %}
+{% endfor %}
+
+{% section 'cart-template' %}
+{% section 'cart-frequently-bought' %}
+
+<div data-product-recommendations-container></div>
+{% assign cart_total_price = cart.total_price | minus: gwp_price %}
+
+<p style="color: #fff">{{ cart_total_regular }}</p>
+
+
+{% for product in collections.free-gift.products %}
+  {% assign id =  product.variants.first.id  %}
+{% endfor %}
+
+
+{% assign gwp = true %}
+{% assign makeup = false %}
+{% for item in cart.items %}
+    {% if item.variant.compare_at_price > item.price %}
+      {% assign gwp = false %}
+    {% endif %}
+	{% if item.product.tags contains 'makeup' %}
+		{% assign makeup = true %}
+	{% endif %}
+
+{% endfor %}
+
+
+{% assign gwp_price_one = gwp_price_one | plus: section.settings.gwpone %}
+{% assign gwp_price_two = gwp_price_two | plus: section.settings.gwptwo %}
+{% assign gwp_price_three = gwp_price_three | plus: section.settings.gwpthree %}
+
+{% if total_cart_less_gwp < 350000 and total_cart_less_gwp >= 250000 %}
+    {% include 'gwp-add' %}
+{% elsif total_cart_less_gwp >= 350000 %}
+	{% include 'gwp-add-third' %}
+{% else %}
+	{% include 'gwp-remove' %}
+{% endif %}
+
+
+
+
+
+
+<script>  
+  var url = window.location.href;
+  if (url == 'https://www.ellanacosmetics.com/cart#removegwp') {
+    {% if newTotal > 1000000 %}
+    $('#gwp').slideDown();
+    {% else %}
+    $('#gwp').slideUp();
+    {% endif %}
+    
+    Shopify.Cart = Shopify.Cart || {};
+
+    Shopify.Cart.GiftWrap = {};
+
+
+    Shopify.Cart.GiftWrap.remove = function() {
+      jQuery.ajax({
+        type: 'POST',
+        url: '/cart/update.js', 
+        data: { updates: { 
+                 {{ id }}: 0 
+                }
+              }, 
+        dataType: 'json',
+        success: window.onload = function() {
+        if(!window.location.hash) {
+            window.location = window.location + '#removegwp';
+            window.location.reload();
+        }
+    }
+  });
+}
+
+jQuery(function() {
+  Shopify.Cart.GiftWrap.remove();
+});
+    
+  }  
+$('#gwp-remove').click(function(){
+  $('#gwp').slideUp();
+});
+</script>
+
+<style>
+.gwp-btn {
+  background-color: #f4a482!important;
+  margin: 0 0 15px 0;
+  width: 170px;
+}
+ #gwp-remove {
+   background-color: #fff!important;
+   border: solid 1px gray;
+   color: gray;
+   width: 170px;
+ }
+  #smile-ui-container { opacity: 0!important;}
+</style>
+
+
+
+
+
+
+
+
+<style type="text/css">
+
+.first-purchase-code{
+    padding:40px;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  width: 100%;
+}
+.first-purchase-code b{
+    font-weight: 600;
+}
+.coupon-code,.first-purchase-code p, .first-purchase-code h1, .first-purchase-code h2, .first-purchase-code h4{
+    font-family: Poppins, sans-serif;
+    color: #F08D80;
+    text-align: center;
+    padding:0;
+    margin:0;
+  	font-weight: bold;
+    letter-spacing: 0;
+}
+.first-purchase-code h1{
+    font-size:36px;
+  	text-transform: inherit;
+}
+.first-purchase-code .coupon-code{
+    margin: 0 auto;
+    padding: 20px 30px;
+    color: #fff;
+    font-size: 36px;
+    background: #F08D80;
+    font-weight: 600;
+    width: 90%;
+}
+.first-purchase-code p{
+    font-size: 28px;
+    line-height: 1.1em;
+    font-weight: 100;
+}
+.first-purchase-code p:nth-of-type(2){
+    font-size: 28px;
+    line-height: 1.1em;    
+    margin-bottom:30px;
+}
+  @media only screen and (max-width:767px){
+  }
+.first-purchase-code h4{
+    margin: 40px auto 0;
+    font-size: 18px;
+    font-weight: 100;
+    width: 500px;
+}
+  
+  .first-purchase-code .wrapper{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>
+
+<style>
+
+
+  
+#content {
+    position: relative;
+    padding: 0;
+    top: 50%;
+    transform: translateY(100%);
+    text-align: center;
+    max-width: none;
+  	#news-signup p {
+      color: #fff;
+    }
+}
+          #news-signup input, #news-signup button {
+              -webkit-appearance: none;
+              border-radius: 0;
+              outline: none;
+              resize: none;
+               font-family: 'Roboto Slab', serif;
+              -webkit-font-smoothing: antialiased
+          }
+
+          #news-signup p.button input{
+              display: inline-block;
+              background: #FFD800;
+              border: 0;
+              color: #000;
+              line-height: 1em;
+              font-weight: 400;
+              text-transform: uppercase;
+              cursor: pointer;
+              -moz-transition: background 0.3s;
+              -o-transition: background 0.3s;
+              -webkit-transition: background 0.3s;
+              transition: background 0.3s
+          }
+          #news-signup p.button input:hover {
+              background: #FF9000
+          }
+          #news-signup form {
+              display: inline-block;
+              margin-bottom: 31px
+          }
+
+          #news-signup form input {
+              
+              color: #000000
+          }
+
+          #news-signup form input[type=text] {
+              background: #fff;
+              line-height: 1em;
+              border: 1px solid #d4d7da;
+              height: 50px
+          }
+
+          #news-signup{
+              position: fixed;
+              width: 100%;
+              visibility: hidden;
+              z-index: 10002;
+              top: 0;
+              opacity: 0;
+              /* -webkit-transform: scale(0.5);
+              transform: scale(0.5);
+              -webkit-transition: -webkit-transform 0.2s, opacity 0.2s, visibility 0s 0.2s;
+              transition: transform 0.2s, opacity 0.2s, visibility 0s 0.2s; */
+              height: 100vh;
+          }
+          #news-signup .wrapper {
+              background: #fff!important;              
+              margin: 0 auto;
+              text-align: center;
+              transform: scale(0.7);
+              top:80px;
+              -moz-border-radius: 3px;
+              box-shadow: 0px 1px 10px rgba(0,0,0,0.5);
+              width: 98%;
+              position: relative;
+            
+              /* transform: translate(-50%, -50%); */
+          }
+          #news-signup_bg {
+               visibility: hidden;
+               position: fixed;
+               top: 0;
+               left: 0;
+               width: 100%;
+               height: 100%;
+               background-color: #ffffff;
+               opacity: 0.4;
+               z-index: 10001;
+           }
+          #news-signup_close {
+              position: absolute;
+              left: 100%;
+              margin: 7px 0 0 -30px;
+              width: 20px;
+              height: 20px;
+              color: #fff;
+              opacity:1;
+              cursor: pointer;
+              font-size: 28px;
+              z-index: 99999;
+          }
+
+          #news-signup_close::before {
+              content: "×";
+              color:#000;
+              
+          }
+
+          #news-signup_close:hover {
+              opacity:1;
+          }
+
+
+
+          #news-signup .newsletter-content form {
+              margin: 0;
+              padding: 0;
+              width: 90%;
+          }
+
+          #news-signup .newsletter-content form p {
+              margin: 0 auto 10px
+          }
+
+          #news-signup .newsletter-content form p:not(.button) {
+              float: none;
+              width: 100%;
+          }
+
+          #news-signup .newsletter-content form p:not(.button) input {
+              width: 100%;
+              margin: 0;
+              padding: 12px 15px !important;
+              border-color: #d0d5d8
+          }
+
+          #news-signup .newsletter-content form .button {
+              float: none;
+              width: 100%
+          }
+
+          #news-signup .newsletter-content form .button input {
+              width: 100%;
+              padding: 20px 25px 18px !important;
+              font-size: 12px
+          }
+
+          #news-signup .newsletter-content p.footnote {
+              filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=50);
+              opacity: 0.8;
+              
+              color: #abb0b7;
+              margin-bottom: 0
+          }
+
+          @media screen and (min-width: 800px){
+
+              #news-signup .wrapper {
+                  width: 660px;
+                  margin: 0 auto;
+              }
+              #news-signup .newsletter-content form .button input {
+                  width: auto;
+                  margin: 0
+              }
+              #news-signup .newsletter-content form .button {
+                  float: left;
+                  width: auto;
+                  margin-left: 15px;
+              }
+              #news-signup .newsletter-content form {
+                  width: auto
+              }
+              #news-signup .newsletter-content form p {
+                  margin: 0 auto 15px
+              }
+              #news-signup .newsletter-content form p:not(.button) {
+                  float: left;
+                  width: auto
+              }
+              .newsletter-content form p:not(.button) input {
+                  width: 300px!important;
+                  margin: 0 15px 0 0
+              }
+          }
+  @media only screen and (max-width:1400px){
+    .first-purchase-code{
+      padding:40px;
+    }
+    .first-purchase-code h4{
+    	font-size:14px;
+    }
+  	#news-signup .wrapper {
+     	
+      scale:0.8;
+      
+      margin:0 auto;
+      margin-top: 50px;
+    }
+  }
+  @media only screen and (max-width:768px){
+    #news-signup .wrapper {
+    	margin-top:100px;
+    }
+
+  }
+  @media only screen and (max-width:767px){
+        #news-signup .wrapper {
+    	margin-top:50px;
+          width:90%
+    }
+    .first-purchase-code .coupon-code{
+    	font-size:20px;
+      padding-top:20px;
+      padding-bottom:20px;
+    }
+    .first-purchase-code{
+      padding:20px;
+    }
+  	.first-purchase-code p:nth-of-type(2){
+      font-size: 24px;
+      line-height: 1.1em;    
+      margin-bottom:30px;
+    }
+    .first-purchase-code h1{
+      line-height:1.1;
+      font-size:36px;
+    }
+    .first-purchase-code p:nth-of-type(2){
+      font-size: 24px;
+      line-height: 1.2em;    
+      margin-bottom:25px;
+    }
+    .first-purchase-code h4{
+    	margin:20px auto 0;
+      	width:auto;
+    }
+
+  }
+  @media only screen and (max-width:480px){
+        #news-signup .wrapper {
+    	margin-top:50px;
+    }
+    .price_total {
+      display: block;
+      text-align: left;
+    }
+    #news-signup .wrapper{
+    	width:100%;	
+    }
+  	    .first-purchase-code .coupon-code{
+    	margin: 0 auto;
+        padding: 12px 20px;
+        color: #fff;
+        font-size: 20px;
+        background: #EF614F;
+        font-weight: 600;
+        width: 100%;	
+      	font-size:20px;
+    }
+    .disable-cart {
+       display: none;
+    }
+    .disable-prod {
+      display: block!important;
+    }
+  }
+ .mobile-atc #checkout {
+   width: 85%;
+    min-height: 45px;
+ }
+</style>

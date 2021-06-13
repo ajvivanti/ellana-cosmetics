@@ -1,0 +1,39 @@
+<!-- filename: infobar.liquid -->
+{% unless section.settings.display_promobox == blank %}
+<div class="container ff" style="">
+  <div class="infobar">
+    {% unless section.settings.promobox_title == blank %}<p style="margin-bottom:6px;font-size:15px;"><b>{{ section.settings.promobox_title }}</b></p>{% endunless %}
+    {% unless section.settings.promobox_text1 == blank %}<p>{{ section.settings.promobox_text1 }}{% endunless %}
+	{% unless section.settings.promobox_text2 == blank %}<br>{{ section.settings.promobox_text2 }}{% endunless %}
+    {% unless section.settings.promobox_text3 == blank %}<br>{{ section.settings.promobox_text3 }}{% endunless %}
+    {% unless section.settings.promobox_text4 == blank %}<br>{{ section.settings.promobox_text4 }}{% endunless %}
+    {% unless section.settings.promobox_text5 == blank %}<br>{{ section.settings.promobox_text5 }}</p>{% endunless %}
+  </div> 
+</div>
+{% endunless %}
+<style>  
+    .ff{
+      width:100%;
+    }
+    .infobar{
+      width: 100%;
+      margin-top:{{ section.settings.promobox_margin-top }}px;
+      margin-bottom:{{ section.settings.promobox_margin-bottom }}px;
+      border: 1px solid {{ section.settings.promobox_border }} !important;	  
+  	  background-color: {{ section.settings.bcolor }} !important;
+    }  
+  	.infobar p{
+      color: {{ section.settings.tcolor }} !important;
+      text-align: {% if lalign %}left{% else %}center{% endif %} !important;;
+  	}
+    
+    @media only screen and (max-width:480px){
+      .infobar{
+          width:93%;
+          display:block;
+          margin-left:auto;
+          margin-right:auto;
+      }
+    }
+
+</style>

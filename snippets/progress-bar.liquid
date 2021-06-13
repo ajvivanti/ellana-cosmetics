@@ -1,0 +1,219 @@
+<style>
+/*  Style the progress bar  */
+.cart-shipping__wrapper {
+  padding: 15px 3px;
+  max-width: 700px;
+  margin: 0 auto;
+  display: none;
+}
+.cart-shippingThreshold__bar {
+  position: relative;
+  /*  Progress bar background color  */
+  background-color: {{ section.settings.bar_color }};
+  height: 1rem;
+  border-radius: 10px;
+}
+.cart-shippingThreshold__progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+  transition: width 2s;
+  display: block;
+  /*  Progress bar fill color  */
+  background-color: {{ section.settings.progress_bar_color }};
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent));
+    background-image: -moz-linear-gradient( -45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent );
+    z-index: 1;
+    -webkit-background-size: 50px 50px;
+    -moz-background-size: 50px 50px;
+    background-size: 50px 50px;
+    -webkit-animation: move 2s linear infinite;
+    -moz-animation: move 2s linear infinite;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+  @-webkit-keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 50px 50px;
+    }
+}
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 50px 50px;
+    }
+}
+.cart-shipping__numOuter, .cart-shipping__success {
+  margin-bottom: 10px;
+  font-size: 1.35rem;
+  color: {{ section.settings.text_color }};
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 233px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 18;
+  top: 30px;
+  right: -5px;
+}
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 5%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+  .tooltip svg {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    width: 17px;
+  }
+  .tooltip .infodummy {
+  	opacity: 0;
+    cursor: pointer;
+  }
+</style>
+
+
+
+
+    {% if section.settings.enable_progress_bar %}
+      <div class="cart-shipping__wrapper">
+      <p class="cart-shipping__numOuter" style="display: none;">You're $<span class="cart-shipping__num"></span> {{ section.settings.text_before }}
+        <span class="tooltip">
+        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="info-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-info-circle fa-w-16 fa-2x"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm0-338c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" class=""></path></svg>
+          <span class="infodummy">info</span>
+          <span class="tooltiptext">{{ section.settings.info_box }}</span>
+        </span>
+      </p>
+      <p class="cart-shipping__success" style="display: none;">{{ section.settings.text_after }}
+        <span class="tooltip">
+        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="info-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-info-circle fa-w-16 fa-2x"><path fill="currentColor" d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm0-338c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z" class=""></path></svg>
+          <span class="infodummy">info</span>
+          <span class="tooltiptext">{{ section.settings.info_box }}</span>
+        </span>
+      </p>
+      <div class="cart-shippingThreshold__bar">
+        <span class="cart-shippingThreshold__progress"></span>
+      </div>
+    </div>
+    {% endif %}
+
+
+
+
+{% assign limit = 100 | plus: 0 %}
+{% assign upsell_limit = 1 | plus: 0 %}
+{% capture cart_handles %}{% for item in cart.items %}{{item.product.handle}}{%unless forloop.last%},{%endunless%}{% endfor %}{% endcapture %}
+{% assign cart_handles = cart_handles | split: ',' | uniq | join: ',' %}
+{% assign upsell_handles = '' %}
+
+{% for item in cart.items %}
+    {% if item.product.metafields.simplemodern.add_on_products != blank %}
+       {% assign item_upsell_handles = item.product.metafields.simplemodern.add_on_products | split: '|' %}
+       {% for upsell in item_upsell_handles %}
+       {% assign upsell = upsell %}
+       {% unless cart_handles contains upsell %}
+          {% capture upsell_handles %}{% unless upsell_handles == blank %}{{upsell_handles}},{% endunless %}{{upsell}}{%endcapture%}
+       {% endunless %}
+       {% endfor %}
+     {% else %}
+          {% assign item_upsell_handles = ''%}
+     {% endif %}
+{% endfor %}
+
+
+
+<script>
+// Calculate the progress number, and the width of the progress bar. Compiled to ES5.
+function calculateProgress(currentVal, targetVal) {
+    var progressBar = document.querySelectorAll('.cart-shippingThreshold__progress');
+    var progressNum = document.querySelectorAll('.cart-shipping__num');
+    var progressOuter = document.querySelectorAll('.cart-shipping__numOuter');
+    var successMsg = document.querySelectorAll('.cart-shipping__success');
+    // calculate how far progress is from the total as a percentage
+    var result = Math.round(100 * currentVal / targetVal);
+    progressBar.forEach(function(el){
+      el.setAttribute('style', "width: ".concat(result, "%"));
+    })
+     // Update the progess text. If threshold is met, show success message
+    var newProgressNum = (targetVal - currentVal) / 100;
+    if(newProgressNum <= 0){
+      successMsg.forEach(function(el){
+        el.setAttribute('style', 'display: block;');
+      });
+      progressOuter.forEach(function(el){
+        el.setAttribute('style', 'display: none;');
+      });
+      progressNum.forEach(function(el){
+        el.textContent = newProgressNum;
+      });
+    } else {
+      successMsg.forEach(function(el){
+        el.setAttribute('style', 'display: none;');
+      });
+      progressOuter.forEach(function(el){
+        el.setAttribute('style', 'display: block;');
+      });
+      progressNum.forEach(function(el){
+        el.textContent = newProgressNum;
+      });
+    }
+  };
+</script>
+
+{% assign threshold = 0 %}
+{% assign threshold = threshold | plus: section.settings.threshold %}
+
+<script>
+$(function(){
+    function update() {
+      jQuery.getJSON('/cart.js', function(cart) {
+              $('#cart-total-amount').html(Shopify.formatMoney(cart.total_price));
+              window.setTimeout(update, 500);
+           calculateProgress(cart.total_price, {{ threshold }});
+         });
+      if($('.cartupsell .cart-upsell-container').length == 0){
+            $( ".minicart__list" ).css('max-height', '65%');
+       }
+    }
+    $(document).one('click', function(evt) {
+      update();
+    });
+});
+</script>
