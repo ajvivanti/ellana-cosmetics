@@ -739,7 +739,7 @@
         "settings": {
           "rotate": true,
           "promo_text": "<p><a href=\"\/collections\/deals\" title=\"All Deals\">50% OFF FAN FAVES ⚡ OGBB FOUNDIE, GLASS SKIN GLOW, & PRIMERS! 🤩<\/a><\/p>",
-          "promo_text2": "<p><a href=\"\/collections\/stay-fresh-skin-care-set\" title=\"Stay Fresh Skin Care Set\">NEW 🤩 STAY FRESH 🌿 & FLOWER POWER 💐 SKIN ESSENTIALS ⚡ SELLING FAST<\/a><\/p>",
+          "promo_text2": "<p><a href=\"\/collections\/99-peso-deals\" title=\"All Deals\">₱99 SALE!🤩 UP TO JUNE 17 ONLY!  ⚡ SELLING FAST<\/a><\/p>",
           "promo_text3": "<p><a href=\"\/collections\/deals\" title=\"All Deals\">UP TO 3 FREE GIFTS! 💝<br>FREE SHIPPING AT ₱1500! 🎉<\/a><\/p>",
           "social_icons_header": true,
           "phone_number": "",
@@ -925,8 +925,8 @@
           "countdown_title": "",
           "endsin": "CURRENT SALE<br>ENDS IN",
           "countdown_link": "shopify:\/\/collections\/deals",
-          "countdown_days": false,
-          "countdown_enddate": "June 14, 2021 9:00:00",
+          "countdown_days": true,
+          "countdown_enddate": "June 18, 2021 9:00:00",
           "display_savings": true,
           "show_payment_button": false,
           "product_images_position": "left",
@@ -2759,13 +2759,24 @@
               "feature_collection": "deals"
             }
           },
+          "75083f85-b487-4d57-8028-751b8b0a04fb": {
+            "type": "image",
+            "settings": {
+              "title": "₱99 SALE",
+              "mp4": "",
+              "image": "shopify:\/\/shop_images\/2000x750-Web-Banner-June-14-17.jpg",
+              "image2": "shopify:\/\/shop_images\/1000x750-Mob-Banner-June-14-17.jpg",
+              "fullwidth-banner": false,
+              "feature_collection": "99-peso-deals"
+            }
+          },
           "0019ac75-7c23-472b-8254-faa3c66c8ece": {
             "type": "image",
             "settings": {
-              "title": "Crazy Deals",
+              "title": "Deals Under ₱500",
               "mp4": "",
-              "image": "shopify:\/\/shop_images\/2000x750-June-Crazy-Deals_1.jpg",
-              "image2": "shopify:\/\/shop_images\/1000x750-June-Crazy-Deals_1.jpg",
+              "image": "shopify:\/\/shop_images\/2000x750-Web-Homepage-Banner-June-9-27-Promo.jpg",
+              "image2": "shopify:\/\/shop_images\/1000x750-Mob-Homepage-Banner-June-9-27-Promo.jpg",
               "fullwidth-banner": false,
               "feature_collection": "deals-under-500"
             }
@@ -2828,6 +2839,7 @@
         },
         "block_order": [
           "1598418448853",
+          "75083f85-b487-4d57-8028-751b8b0a04fb",
           "0019ac75-7c23-472b-8254-faa3c66c8ece",
           "ff6084f3-b45f-4daa-8fe4-7d7556ee96e7",
           "bfa8743e-5aee-4583-970a-206831a92b07",
@@ -2860,11 +2872,11 @@
           "text-color": "#fd8080",
           "button-color": "#fd8080",
           "button-text-color": "#fd8080",
-          "countdown_enable": true,
+          "countdown_enable": false,
           "countdown_title": "Crazy Deals",
           "endsin": "CRAZY DEALS<br>ENDING IN",
           "countdown_days": false,
-          "countdown_enddate": "June 14, 2021 9:00:00",
+          "countdown_enddate": "June 18, 2021 9:00:00",
           "next_deal": "next-daily-deals"
         }
       },
@@ -5503,6 +5515,26 @@
       "16118403853a618dd0": {
         "type": "slideshow",
         "blocks": {
+          "0f2024a9-f0f7-47ed-b492-6d7de7c1a83f": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/2000x750-Web-Banner-June-14-17.jpg",
+              "image2": "shopify:\/\/shop_images\/1000x750-Mob-Banner-June-14-17.jpg",
+              "pretext": "",
+              "title": "",
+              "subtitle": "",
+              "caption_background": false,
+              "caption_background_transparency": false,
+              "button1": "",
+              "button1_link": "shopify:\/\/collections\/99-peso-deals",
+              "button1_highlight": false,
+              "button2": "",
+              "button2_highlight": false,
+              "text_position": "center",
+              "text_align": "center",
+              "mobile_image_crop": "none"
+            }
+          },
           "0629d3ae-f16f-4d44-a41a-bfbf91261310": {
             "type": "image",
             "settings": {
@@ -5515,26 +5547,6 @@
               "caption_background_transparency": false,
               "button1": "",
               "button1_link": "shopify:\/\/collections\/deals",
-              "button1_highlight": false,
-              "button2": "",
-              "button2_highlight": false,
-              "text_position": "center",
-              "text_align": "center",
-              "mobile_image_crop": "none"
-            }
-          },
-          "0f2024a9-f0f7-47ed-b492-6d7de7c1a83f": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/2000x750-June-Crazy-Deals_1.jpg",
-              "image2": "shopify:\/\/shop_images\/1000x750-June-Crazy-Deals_1.jpg",
-              "pretext": "",
-              "title": "",
-              "subtitle": "",
-              "caption_background": false,
-              "caption_background_transparency": false,
-              "button1": "",
-              "button1_link": "shopify:\/\/collections\/deals-under-500",
               "button1_highlight": false,
               "button2": "",
               "button2_highlight": false,
@@ -5605,8 +5617,8 @@
           }
         },
         "block_order": [
-          "0629d3ae-f16f-4d44-a41a-bfbf91261310",
           "0f2024a9-f0f7-47ed-b492-6d7de7c1a83f",
+          "0629d3ae-f16f-4d44-a41a-bfbf91261310",
           "c3d43c2f-e9c3-4638-b56a-a3e82aa46e64",
           "c099590e-f74c-4172-b90b-78a663a66809",
           "cd80165f-feac-4c57-bf3d-1a0c0fa643ef"
@@ -6319,8 +6331,8 @@
           "title": "",
           "endsin": "CURRENT SALE<br>ENDS IN",
           "link": "shopify:\/\/collections\/deals",
-          "days": false,
-          "enddate": "June 14, 2021 9:00:00"
+          "days": true,
+          "enddate": "June 18, 2021 9:00:00"
         }
       },
       "page-mothers-day": {
