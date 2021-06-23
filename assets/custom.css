@@ -3674,3 +3674,11 @@ color: #fff !important !important;
 .text-title.text-center{
 	font-size:21px;
 }
+
+/* made footer 1st column same size and with underline */
+.footer .one-third:first-child p > a, .footer .one-third:first-child p > a:visited,
+.footer .one-third .toggle_content p,
+.footer .one-third:first-child .toggle_content p > a{
+	font-size:12px !important;
+  	 text-decoration: underline;
+}
