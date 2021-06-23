@@ -3668,3 +3668,9 @@ color: #fff !important !important;
   }
 
 }
+
+/* made homepage header same size */
+.headline, .empty_cart, .promo-banner, .title,
+.text-title.text-center{
+	font-size:21px;
+}
