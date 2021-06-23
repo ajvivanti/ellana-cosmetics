@@ -3682,3 +3682,19 @@ color: #fff !important !important;
 	font-size:12px !important;
   	 text-decoration: underline;
 }
+
+
+
+
+.sw-instagram-footer-load-more div{
+	background:#fff !important;
+  	border:1px solid #89837D  !important;
+  	margin-top:20px !important;
+  	margin-bottom: 40px !important;
+    padding:12px 26px !important;
+  	border-radius:50px !important;
+}
+.sw-instagram-footer-load-more div strong span{
+	color:#89837D !important;
+  	text-transform: uppercase;
+}
