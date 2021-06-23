@@ -1,16 +1,17 @@
 <!-- filename: product-reco.liquid -->
 <div class="section" style="margin-bottom:50px; text-align: center;width:100%;"> 
+  	{% assign recocount = 0 %}
   	<center style="display:flex;flex-wrap:wrap;justify-content:center; text-align: center;width:100%"><h2 style="    margin-bottom: 30px;
     margin-top: 30px;">YOU MAY ALSO LIKE</h2></center>
         <div class="e-flex flex-wrap">
         {% if product.metafields.global.productrecommendation == blank %}
   			{% assign count = 0 %}
-  			{% for collection in product.collections %}
+
   				
                     {% assign prodreco = collection.title %} 
                     {% assign tagcounter = 0 %}
                     {% for product in collections['best-seller'].products limit: 4 %}
-  						{% if count < 4 %}	
+
                           {% if product.object_type == 'product' %}
                               {% if product.available %}
                               {% unless product.tags contains 'hiddenoncollections' %}
@@ -30,7 +31,7 @@
                             </div>
                           {% endif %}
                         </a>
-                     
+                      {% assign count = count | plus: 1 %}
                       {% render "product-details", product: product %}
                     </div>
                     <a class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}" href="{{ product.url | within: collection }}">
@@ -43,12 +44,12 @@
 
                               {% endif %}
                           {% endif %}                          
-  						{% endif %} 
+
   						{% assign count = count | plus: 1 %}
                     {% endfor %}  				
   				 
    					
-            {% endfor %}
+            
             
      		{% else %}
   
@@ -63,6 +64,27 @@
 
     {% assign prodcol = collection.title %} 
            {% paginate collections.ellana-product-line-2021.products by 250 %}
+            {% assign tagcounter = 0 %}
+                {% for product in collections.ellana-product-line-2021.products %}      
+                    {% if product.object_type == 'product' %}
+                        {% if product.available %}
+  							{% for recos in prodreco %}
+  								
+                                {% if product.handle == recos %}                                
+          							{% assign recocount = recocount | plus: 1 %}
+  								{% endif %}
+  							{% endfor %}
+                        {% else %}
+
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+  		 {% endpaginate %}
+       
+          
+          {% if recocount > 3 %}
+          
+                     {% paginate collections.ellana-product-line-2021.products by 250 %}
             {% assign tagcounter = 0 %}
                 {% for product in collections.ellana-product-line-2021.products %}      
                     {% if product.object_type == 'product' %}
@@ -95,8 +117,10 @@
                     </a>
                   </div>
                 </div>   
-                                	
-  								{% endif %}
+                                
+          {% assign recocount = recocount | plus: 1 %}
+          
+          {% endif %}
   							{% endfor %}
                         {% else %}
 
@@ -104,6 +128,64 @@
                     {% endif %}
                 {% endfor %}
   		 {% endpaginate %}
+          
+          
+          {% else %}
+          
+          
+          
+          
+            			{% assign count = 0 %}
+  			{% for collection in product.collections %}
+  				
+                    {% assign prodreco = collection.title %} 
+                    {% assign tagcounter = 0 %}
+                    {% for product in collections['best-seller'].products limit: 4 %}
+  						
+                          {% if product.object_type == 'product' %}
+                              {% if product.available %}
+                              {% unless product.tags contains 'hiddenoncollections' %}
+                <div class="reco-products">
+                  <div class="product-wrap">
+                    <div class="relative product_image swap-{{ settings.collection_secondary_image }}">
+                      <a href="{{ product.url | within: collection }}">
+                        <div class="image__container">
+                          {% render 'image-element', image: product.featured_image, alt: alt_text, object_fit: settings.align_height, max_height: section.settings.collection_height %}
+                        </div>
+                          {% if settings.collection_secondary_image != blank %}
+                            <div class="image__container">
+                              <img src="{% if product.images[1] != blank %}{{ product.images[1] | img_url: '800x' }}{% else %}{{ product.featured_image | img_url: '800x' }}{% endif %}"
+                              class="secondary lazyload"
+                              alt="{{ alt_text | escape }}"
+                              />
+                            </div>
+                          {% endif %}
+                        </a>
+                      {% assign count = count | plus: 1 %}
+                      {% render "product-details", product: product %}
+                    </div>
+                    <a class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}" href="{{ product.url | within: collection }}">
+                      {% render "beauty-product-info", product: product %}
+                    </a>
+                  </div>
+                </div>   
+                              {% endunless %}
+                              {% else %}
+
+                              {% endif %}
+                          {% endif %}                          
+  						
+  						{% assign count = count | plus: 1 %}
+                    {% endfor %}  				
+  				 
+   					
+            {% endfor %}
+          
+          
+          
+          
+          {% endif %}
+          
   		{% endif %}
           </div>
   <!--
