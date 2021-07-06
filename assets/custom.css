@@ -822,6 +822,7 @@ li.active a, li.active a:hover {
     margin: 0;
 }
 @media only screen and (max-width: 768px) {
+	.buyat456,
     .sale_holder {
         padding: 4px 10px;
         font-size: smaller;
