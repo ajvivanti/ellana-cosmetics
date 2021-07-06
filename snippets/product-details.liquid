@@ -41,6 +41,19 @@
      New!
     </div>
 {% endif %}
+
+{% if product.tags contains 'two-tier' %}
+   <div class="buyat456">
+       	BUY 2@456
+    </div>
+{% endif %}
+{% if product.tags contains 'three-tier' %}
+   <div class="buyat456">
+    	BUY 3@456
+    </div>
+{% endif %}
+
+
 {% if product.tags contains 'comingsoon' %}
 <div class="sale_holder" style="background-color: #e68c5d;">
   {{ settings.coming_soon_text }}

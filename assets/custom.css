@@ -798,6 +798,25 @@ li.active a, li.active a:hover {
     -moz-osx-font-smoothing: grayscale;
     font-smoothing: antialiased;
 }
+.buyat456{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: #BF1F3E;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 12px;
+    text-align: center;
+    color: #fff;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+}
+.buyat456 p,
 .sale_holder p {
     margin-bottom: 0;
     margin: 0;
