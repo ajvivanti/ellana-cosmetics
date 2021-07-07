@@ -78,8 +78,8 @@
             	{% include 'countdown-snippet' %}
             {% endif %}
             {% endif %}
-                     
 
+			
                         {% include 'infobar' %}
             <style>
               .infobar {
@@ -102,42 +102,7 @@
     {% if section.settings.enable_shopify_product_badges and settings.enable_shopify_review_comments %}
 	<a href="#shopify-product-reviews" id="anchorreview">  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span></a>
     {% endif %}
-<div style="justify-content: center; text-align:center;" class="product product-{{ product.id }} product-name--{{ product.handle }} product_section js-product_section is-flex media-position--{{ section.settings.product_images_position }}" data-rv-handle="{{ product.handle }}">
-    {% if collection_handles contains 'coming-soon' %}
-      <p class="modal_price">{{ 'collections.general.coming_soon' | t }}</p>
-    {% else %}
-      <div class="modal_price">
-        {% unless product.available == false and settings.display_price == false %}
-          <div class="price__container price__container--display-price-{{ settings.display_price }} {% if settings.display_price %}has-margin-right{% endif %}">
-            <span content="{{ variant.price | money_without_currency | remove: "," }}" class="{% if variant.compare_at_price > variant.price %}sale{% endif %}">
-              <span class="current_price">
-                {% if variant.price > 0 %}
-                  <span class="money">{% render 'price-element', price: variant.price %}</span>
-                {% else %}
-                  {{ settings.free_price_text }}
-                {% endif %}
-              </span>
-            </span>
-            <span class="was_price">
-              {% if variant.price < variant.compare_at_price %}
-                <span class="money">{% render 'price-element', price: variant.compare_at_price %}</span>
-              {% endif %}
-            </span>
-            {% if section.settings.display_savings %}
-              <span class="sale savings">
-                {% if variant.price < variant.compare_at_price %}
-                  {{ 'products.product.savings' | t }}  {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}% 
-                {% endif %}
-              </span>
-          {% endif %}
-          </div>
-        {% endunless %}
-        <div class="sold-out__container">
-          <span class="sold_out">{% if variant.available == false %}{{ settings.sold_out_text }}{% endif %}</span>
-        </div>
-      </div>
-    {% endif %}
-</div>
+
 <div class="product product-{{ product.id }} product-name--{{ product.handle }} product_section js-product_section is-flex media-position--{{ section.settings.product_images_position }}" data-rv-handle="{{ product.handle }}">
 
   <div class="one-whole columns medium-down--one-whole product__images">
@@ -1177,3 +1142,4 @@ $( ".accordion dt:contains('Description')" ).hide(this);
 </script>
 
 
+ 

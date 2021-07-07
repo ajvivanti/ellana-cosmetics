@@ -822,12 +822,18 @@ li.active a, li.active a:hover {
     margin: 0;
 }
 @media only screen and (max-width: 768px) {
-	.buyat456,
+	
     .sale_holder {
         padding: 4px 10px;
         font-size: smaller;
         right: 0;
-   }
+   } 
+   .buyat456{
+	padding: 0px 8px;
+    font-size: 9px;
+    right: -8px;
+	}
+   
 }
 .spr-badge-starrating .spr-icon {
     font-size: 80% !important;
@@ -3717,4 +3723,24 @@ color: #fff !important !important;
 .sw-instagram-footer-load-more div strong span{
 	color:#89837D !important;
   	text-transform: uppercase;
+}
+
+
+
+
+#anchorreview{
+	margin-bottom:15px !important;
+  	display:block;
+}
+
+.product .modal_price{
+	margin-bottom:0 !important;
+  	padding-bottom:0 !important;
+}
+
+.product .one-whole .feature_divider{
+	display:none;
+}
+.product_name{
+	margin-bottom:0 !important;
 }
